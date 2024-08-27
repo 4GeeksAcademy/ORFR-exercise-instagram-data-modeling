@@ -1,6 +1,6 @@
 import os
 import sys
-from sqlalchemy import Column, ForeignKey, Integer, String
+from sqlalchemy import Column, ForeignKey, Integer, String,DateTime
 from sqlalchemy.orm import relationship, declarative_base
 from sqlalchemy import create_engine
 from eralchemy2 import render_er
@@ -54,7 +54,8 @@ class Media(Base):
 class Comment(Base):
     __tablename__ = 'comment'
     id = Column(Integer, primary_key=True)
-    comment_text = Column(String(250))
+    comment_text = Column(String(250), nullable=False)
+    comment_date = Column(DateTime)
     author_id = Column(Integer, ForeignKey('user.id'))
     autor = relationship('User', backref='comment', lazy=True)
     post_id = Column(Integer, ForeignKey('post.id'))
